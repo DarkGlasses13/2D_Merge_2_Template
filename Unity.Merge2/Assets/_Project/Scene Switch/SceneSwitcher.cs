@@ -5,6 +5,10 @@ namespace Assets._Project.Scene_Switch
 {
     public class SceneSwitcher : ISceneSwitcher
     {
-        public async void ChangeAsync(string key) => await Addressables.LoadSceneAsync(key).Task;
+        public async void ChangeAsync(string key)
+        {
+            await Addressables.LoadSceneAsync("Empty").Task;
+            await Addressables.LoadSceneAsync(key).Task;
+        }
     }
 }
