@@ -11,6 +11,8 @@ namespace Assets._Project.UI_Helpers
 
         private void OnValidate() => UpdateScale();
 
+        private void Awake() => UpdateScale();
+
         [ContextMenu("Update Scale")]
         public void UpdateScale()
         {
