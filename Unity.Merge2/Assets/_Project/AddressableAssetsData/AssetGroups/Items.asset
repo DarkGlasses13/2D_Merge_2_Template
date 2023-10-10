@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Default Local Group
+  m_Name: Items
   m_EditorClassIdentifier: 
-  m_GroupName: Default Local Group
+  m_GroupName: Items
   m_Data:
     m_SerializedData: []
-  m_GUID: b5420771db193b7459c27e7010c21981
+  m_GUID: 0ecc5310f0bcea0439c0d4eb0c8d391a
   m_SerializeEntries:
-  - m_GUID: 7180b09913997584197ac81329291e62
-    m_Address: Game Config
+  - m_GUID: 8ec57a44fff5d9549a896ee3076d8a13
+    m_Address: Sprite Atlases
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - item sprite atlas
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: fa4d798444751244689cb4a2512173e3, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: f7b09412a56d68d43bbbe3e33887cfe4, type: 2}
-    - {fileID: 11400000, guid: 16e16dac66bfa854da6c1d7f45745d95, type: 2}
+    - {fileID: 11400000, guid: 7802b70ec7926ae4594b5a6177c4b680, type: 2}
+    - {fileID: 11400000, guid: 92322078dfa55e94faf2abf51890adc0, type: 2}
