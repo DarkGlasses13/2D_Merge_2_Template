@@ -1,6 +1,7 @@
 using Assets._Project;
 using Assets._Project.Items;
 using Assets._Project.Items.Collection;
+using Assets._Project.Items.Merge;
 using UnityEngine;
 using Zenject;
 
@@ -12,7 +13,7 @@ public class GameInstaller : ScriptableObjectInstaller<GameInstaller>
         BindRunner();
         BindConfigLoader();
         BindItemBase();
-        BindItemField();
+        BindMergeGrid();
         BindItemsCollection();
         BindLowerPanel();
         BindControllers();
@@ -22,6 +23,11 @@ public class GameInstaller : ScriptableObjectInstaller<GameInstaller>
     {
         Container
             .Bind<ItemSpawnController>()
+            .FromNew()
+            .AsSingle();
+
+        Container
+            .Bind<MergeGridController>()
             .FromNew()
             .AsSingle();
     }
@@ -42,11 +48,16 @@ public class GameInstaller : ScriptableObjectInstaller<GameInstaller>
             .AsSingle();
     }
 
-    private void BindItemField()
+    private void BindMergeGrid()
     {
         Container
-            .Bind<ItemField>()
-            .FromFactory<ItemFieldFactory>()
+            .Bind<MergeGrid>()
+            .FromFactory<MergeGridFactory>()
+            .AsSingle();
+
+        Container
+            .Bind<MergeGridView>()
+            .FromComponentInHierarchy()
             .AsSingle();
     }
 

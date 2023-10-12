@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -60,5 +61,11 @@ namespace Assets._Project.Items
         }
 
         private Sprite GetSpriteByName(string name) => _sprites.SingleOrDefault(sprite =>  sprite.name == name);
+
+        public Item GetByMergeLevel(int mergeLevel)
+        {
+            mergeLevel = Mathf.Clamp(mergeLevel, 0, _sprites.Count - 1);
+            return GetNewBySpriteName(_sprites[mergeLevel].name);
+        }
     }
 }

@@ -86,7 +86,7 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
-    - Item Data
+    - item sprite atlas
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 9459d89a9b50ab745ab2eabeb3b955fd, type: 2}

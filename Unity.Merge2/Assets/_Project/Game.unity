@@ -578,7 +578,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5767c2168488d4a40943cb93ee47329e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dragingItemIcon: {fileID: 655025690}
+  _mainCanvas: {fileID: 1323182264}
+  _dragItemIcon: {fileID: 655025690}
   _layoutGroup: {fileID: 935332261}
 --- !u!1001 &460269343
 PrefabInstance:
@@ -1104,7 +1105,7 @@ GameObject:
   - component: {fileID: 655025691}
   - component: {fileID: 655025690}
   m_Layer: 0
-  m_Name: Draging Item Icon
+  m_Name: Drag Item Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1144,7 +1145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
