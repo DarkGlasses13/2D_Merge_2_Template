@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -31,6 +30,9 @@ namespace Assets._Project.Items
                 atlas.GetSprites(sprites);
                 _sprites.AddRange(sprites);
             }
+
+            //_sprites.Sort(new SpriteNameComparer());
+            _sprites.ForEach(sprite => Debug.Log(sprite.name));
         }
 
         public Item GetNewBySpriteName(string spriteName)
@@ -53,10 +55,10 @@ namespace Assets._Project.Items
         private Item CreateBySpriteName(string spriteName)
         {
             Sprite sprite = GetSpriteByName(spriteName);
-            int dataMergeLevel = _sprites.IndexOf(sprite);
-            int dataMergeResultLevel = dataMergeLevel + 1;
-            return dataMergeResultLevel < _sprites.Count 
-                ? new Item(sprite, _sprites[dataMergeResultLevel]) 
+            int mergeLevel = _sprites.IndexOf(sprite);
+            int mergeResult = mergeLevel + 1;
+            return mergeResult < _sprites.Count 
+                ? new Item(sprite, mergeLevel, _sprites[mergeResult]) 
                 : null;
         }
 

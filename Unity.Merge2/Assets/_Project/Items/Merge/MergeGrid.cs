@@ -7,6 +7,7 @@ namespace Assets._Project.Items.Merge
     public class MergeGrid
     {
         public event Action OnChanged;
+        public event Action<Item> OnAdded;
 
         private readonly Item[] _items;
 
@@ -27,6 +28,7 @@ namespace Assets._Project.Items.Merge
             {
                 item.IsInUse = true;
                 _items[emptySlot] = item;
+                OnAdded?.Invoke(item);
                 OnChanged?.Invoke();
                 return true;
             }
@@ -41,6 +43,7 @@ namespace Assets._Project.Items.Merge
 
             item.IsInUse = true;
             _items[slot] = item;
+            OnAdded?.Invoke(item);
             OnChanged?.Invoke();
             return true;
         }
@@ -52,6 +55,7 @@ namespace Assets._Project.Items.Merge
 
             item.IsInUse = true;
             _items[slot] = item;
+            OnAdded?.Invoke(item);
             OnChanged?.Invoke();
         }
 

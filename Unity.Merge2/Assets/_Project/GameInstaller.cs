@@ -30,6 +30,11 @@ public class GameInstaller : ScriptableObjectInstaller<GameInstaller>
             .Bind<MergeGridController>()
             .FromNew()
             .AsSingle();
+
+        Container
+            .Bind<ItemCollectController>()
+            .FromNew()
+            .AsSingle();
     }
 
     private void BindLowerPanel()
