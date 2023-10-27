@@ -1,6 +1,8 @@
 using Architecture_Base.Scene_Switching;
 using Assets._Project;
+using Assets._Project.Helpers;
 using Assets._Project.Scene_Switch;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -11,6 +13,7 @@ public class ProjectInstaller : ScriptableObjectInstaller<ProjectInstaller>
     {
         BindPlayer();
         BindRunner();
+        BindSpriteNameComparer();
         BindRandom();
         BindSceneSwitcher();
     }
@@ -28,6 +31,14 @@ public class ProjectInstaller : ScriptableObjectInstaller<ProjectInstaller>
     {
         Container
             .Bind<FastRandom>()
+            .FromNew()
+            .AsSingle();
+    }
+
+    private void BindSpriteNameComparer()
+    {
+        Container
+            .Bind<SpriteNameComparer>()
             .FromNew()
             .AsSingle();
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Assets._Project.Helpers;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -9,14 +10,16 @@ namespace Assets._Project.Items
 {
     public class ItemBase
     {
+        private readonly SpriteNameComparer _spriteNameComparer;
         private readonly FastRandom _random;
         private List<Sprite> _sprites = new();
         private readonly List<Item> _items = new();
 
         public IReadOnlyCollection<Sprite> Sprites => _sprites.AsReadOnly();
 
-        public ItemBase(FastRandom random)
+        public ItemBase(SpriteNameComparer spriteNameComparer, FastRandom random)
         {
+            _spriteNameComparer = spriteNameComparer;
             _random = random;
         }
 
@@ -31,8 +34,7 @@ namespace Assets._Project.Items
                 _sprites.AddRange(sprites);
             }
 
-            //_sprites.Sort(new SpriteNameComparer());
-            _sprites.ForEach(sprite => Debug.Log(sprite.name));
+            _sprites.Sort(_spriteNameComparer);
         }
 
         public Item GetNewBySpriteName(string spriteName)
