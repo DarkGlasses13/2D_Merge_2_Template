@@ -31,7 +31,7 @@ namespace Assets._Project.Items.Collection
 
         private void OnItemAdded(Item item)
         {
-            _player.CollectedItemsCount = item.MergeLevel;
+            _player.CollectedItemsCount = item.MergeLevel + 1;
             _collectionGrid.UpdateCollection(_player.CollectedItemsCount);
         }
 

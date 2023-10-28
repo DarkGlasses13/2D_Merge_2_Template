@@ -30,10 +30,12 @@ namespace Assets._Project.Items.Collection
                 Image item = new GameObject(sprite.name).AddComponent<Image>();
                 item.sprite = sprite;
                 item.transform.SetParent(_scrollRect.content, worldPositionStays: false);
-                item.color = i >= collectedItemsCount ? Color.black : Color.white;
+                item.color = Color.black;
                 _icons.Add(item);
                 await Task.Yield();
             }
+
+            UpdateCollection(collectedItemsCount);
         }
 
         public void Show(Action callback = null)
@@ -66,7 +68,7 @@ namespace Assets._Project.Items.Collection
 
         public void UpdateCollection(int collectedItemsCount)
         {
-            for (int i = 0; i <= collectedItemsCount; i++)
+            for (int i = 0; i < collectedItemsCount; i++)
             {
                 _icons[i].color = Color.white;
             }
