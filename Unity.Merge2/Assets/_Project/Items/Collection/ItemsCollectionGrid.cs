@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
-using static UnityEditor.Progress;
 
 namespace Assets._Project.Items.Collection
 {
@@ -65,9 +64,9 @@ namespace Assets._Project.Items.Collection
             _closeButton.onClick.RemoveListener(OnCloseButtonClicked);
         }
 
-        public void OpenItems(int collectedItemsCount)
+        public void UpdateCollection(int collectedItemsCount)
         {
-            for (int i = 0; i < collectedItemsCount; i++)
+            for (int i = 0; i <= collectedItemsCount; i++)
             {
                 _icons[i].color = Color.white;
             }
