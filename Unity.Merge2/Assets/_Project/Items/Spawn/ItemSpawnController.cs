@@ -33,7 +33,7 @@ public class ItemSpawnController : Controller
         {
             if (_mergeGrid.HasEmptySlots)
             {
-                Item item = _itemBase.GetByMergeLevel(mergeLevel: 0);
+                Item item = _itemBase.GetByMergeLevel(_player.SpawnItemMergeLevel);
 
                 if (_mergeGrid.TryAdd(item))
                     item.IsInUse = true;
