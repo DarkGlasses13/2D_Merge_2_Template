@@ -11,17 +11,14 @@ namespace Assets._Project
     public class GameRunner : Runner, IInitializable, ITickable, ILateTickable, IFixedTickable, IDisposable
     {
         private readonly ItemBase _itemBase;
-        private readonly ItemsCollectionGrid _itemsCollectionGrid;
         private readonly MergeGridController _mergeGridController;
         private readonly ItemSpawnController _itemSpawnController;
         private readonly ItemCollectController _itemCollectController;
 
-        public GameRunner(ItemBase itemBase, ItemsCollectionGrid itemsCollectionGrid,
-            MergeGridController mergeGridController, ItemSpawnController itemSpawnController,
-            ItemCollectController itemCollectController)
+        public GameRunner(ItemBase itemBase, MergeGridController mergeGridController,
+            ItemSpawnController itemSpawnController,ItemCollectController itemCollectController)
         {
             _itemBase = itemBase;
-            _itemsCollectionGrid = itemsCollectionGrid;
             _mergeGridController = mergeGridController;
             _itemSpawnController = itemSpawnController;
             _itemCollectController = itemCollectController;
