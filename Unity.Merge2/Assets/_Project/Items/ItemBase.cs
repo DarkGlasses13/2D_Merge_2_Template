@@ -48,7 +48,9 @@ namespace Assets._Project.Items
             if (item == null)
             {
                 item = CreateBySpriteName(spriteName);
-                _items.Add(item);
+
+                if (item != null)
+                    _items.Add(item);
             }
 
             return item;

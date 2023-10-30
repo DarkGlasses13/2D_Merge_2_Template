@@ -26,7 +26,10 @@ namespace Assets._Project.Items.Merge
 
             if (TryGetEmptySlot(out int emptySlot))
             {
-                item.IsInUse = true;
+
+                if (item != null)
+                    item.IsInUse = true;
+
                 _items[emptySlot] = item;
                 OnAdded?.Invoke(item);
                 OnChanged?.Invoke();
@@ -41,7 +44,9 @@ namespace Assets._Project.Items.Merge
             if (_items[slot] != null)
                 return false;
 
-            item.IsInUse = true;
+            if (item != null)
+                item.IsInUse = true;
+
             _items[slot] = item;
             OnAdded?.Invoke(item);
             OnChanged?.Invoke();
@@ -53,7 +58,9 @@ namespace Assets._Project.Items.Merge
             if (_items[slot] != null)
                 return;
 
-            item.IsInUse = true;
+            if (item != null)
+                item.IsInUse = true;
+
             _items[slot] = item;
             OnAdded?.Invoke(item);
             OnChanged?.Invoke();

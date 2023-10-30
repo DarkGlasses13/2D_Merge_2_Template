@@ -12,6 +12,7 @@ namespace Assets._Project.Upgrade
         [field: SerializeField] public int Levels { get; private set; }
         public float Price => _priceCurve.Evaluate(Level);
         public float Level { get => _level; set => _level = Mathf.Clamp01(value); }
+        public bool IsDone => Level == 1;
 
         public StatUpgrader Clone(Player player)
         {

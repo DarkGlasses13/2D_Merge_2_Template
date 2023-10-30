@@ -52,7 +52,7 @@ namespace Assets._Project.Upgrade
         {
             _upgraders
                 .ForEach(upgrader => _popup
-                .UpdateData(upgrader.Title, upgrader.Price, _player.Money >= upgrader.Price));
+                .UpdateData(upgrader.Title, upgrader.Price, !upgrader.IsDone && _player.Money >= upgrader.Price));
         }
 
         protected override void OnDisable() => _popup.OnUpgrade -= Upgrade;

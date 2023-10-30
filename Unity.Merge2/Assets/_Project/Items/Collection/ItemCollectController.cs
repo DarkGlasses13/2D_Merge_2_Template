@@ -1,7 +1,6 @@
 ﻿using Architecture_Base.Core;
 using Assets._Project.Items.Merge;
 using System.Threading.Tasks;
-using UnityEngine;
 
 namespace Assets._Project.Items.Collection
 {
@@ -31,6 +30,9 @@ namespace Assets._Project.Items.Collection
 
         private void OnItemAdded(Item item)
         {
+            if (item == null)
+                return;
+
             _player.CollectedItemsCount = item.MergeLevel + 1;
             _collectionGrid.UpdateCollection(_player.CollectedItemsCount);
         }
