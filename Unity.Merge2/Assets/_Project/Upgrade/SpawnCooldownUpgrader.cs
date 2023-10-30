@@ -7,14 +7,14 @@ namespace Assets._Project.Upgrade
     {
         [SerializeField] private float _value;
 
-        public override void Upgrade(Player player)
+        protected override float GetLevelByStat(Player player)
         {
-            player.SpawnCooldownSpeedModifire += _value;
+            return (player.SpawnCooldownSpeedModifire - 1) / _value;
         }
 
-        protected override int GetLevelByStat(Player player)
+        protected override void OnUpgrade(Player player)
         {
-            return (int)((player.SpawnCooldownSpeedModifire - 1) / _value);
+            player.SpawnCooldownSpeedModifire += _value;
         }
     }
 }

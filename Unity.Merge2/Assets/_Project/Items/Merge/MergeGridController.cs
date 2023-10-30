@@ -52,7 +52,7 @@ namespace Assets._Project.Items.Merge
             {
                 if (_model.Items.ElementAt(i) != null)
                 {
-                    if (_model.Items.ElementAt(i).MergeLevel <= _player.SpawnItemMergeLevel)
+                    if (_model.Items.ElementAt(i).MergeLevel < _player.SpawnItemMergeLevel)
                     {
                         _model.Remove(i);
                         _model.Put(i, _itemBase.GetByMergeLevel(_player.SpawnItemMergeLevel));

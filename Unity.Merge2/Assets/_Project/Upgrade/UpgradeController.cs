@@ -1,4 +1,5 @@
 ﻿using Architecture_Base.Core;
+using Assets._Project.Money;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +14,16 @@ namespace Assets._Project.Upgrade
         private readonly GameConfigLoader _configLoader;
         private readonly Player _player;
         private readonly UpgradePopup _popup;
+        private readonly MoneyUICounter _moneyCounter;
         private readonly List<StatUpgrader> _upgraders = new();
 
         public UpgradeController(GameConfigLoader configLoader, Player player,
-            UpgradePopup popup) 
+            UpgradePopup popup, MoneyUICounter moneyCounter) 
         {
             _configLoader = configLoader;
             _player = player;
             _popup = popup;
+            _moneyCounter = moneyCounter;
         }
 
         public override async Task InitializeAsync()
@@ -39,16 +42,17 @@ namespace Assets._Project.Upgrade
             if (upgrader != null)
             {
                 _player.Money -= (ulong)upgrader.Price;
-                OnUpgrade?.Invoke();
+                _moneyCounter.Set(_player.Money);
                 upgrader.Upgrade(_player);
+                OnUpgrade?.Invoke();
             }
         }
 
-        public override void FixedTick()
+        public override void Tick()
         {
             _upgraders
                 .ForEach(upgrader => _popup
-                .SwitchInteraction(upgrader.Title, _player.Money >= upgrader.Price));
+                .UpdateData(upgrader.Title, upgrader.Price, _player.Money >= upgrader.Price));
         }
 
         protected override void OnDisable() => _popup.OnUpgrade -= Upgrade;

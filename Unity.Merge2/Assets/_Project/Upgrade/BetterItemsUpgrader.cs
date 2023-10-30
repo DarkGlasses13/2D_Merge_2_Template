@@ -5,14 +5,14 @@ namespace Assets._Project.Upgrade
     [CreateAssetMenu(menuName = "Stat Upgraders/Better Items Upgrader")]
     public class BetterItemsUpgrader : StatUpgrader
     {
-        public override void Upgrade(Player player)
+        protected override float GetLevelByStat(Player player)
         {
-            player.SpawnItemMergeLevel++;
+            return 1.0f / Levels * player.SpawnItemMergeLevel;
         }
 
-        protected override int GetLevelByStat(Player player)
+        protected override void OnUpgrade(Player player)
         {
-            return 1 / Levels * player.SpawnItemMergeLevel;
+            player.SpawnItemMergeLevel++;
         }
     }
 }

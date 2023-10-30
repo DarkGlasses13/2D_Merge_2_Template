@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets._Project.Money;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,13 +13,15 @@ namespace Assets._Project.Upgrade
     {
         public event Action<string> OnUpgrade;
         [SerializeField] private Transform _content;
-        private readonly List<UIProduct> _products = new();
+        private readonly Dictionary<string, UIProduct> _products = new();
         private Player _player;
+        private MoneyFormater _formater;
 
         [Inject]
-        public void Construct(Player player)
+        public void Construct(Player player, MoneyFormater moneyFormater)
         {
             _player = player;
+            _formater = moneyFormater;
             //base.Construct(showHidePattern);
         }
 
@@ -32,14 +35,16 @@ namespace Assets._Project.Upgrade
                 product.Price = upgrader.Price.ToString();
                 product.Description = upgrader.Description;
                 product.Icon = upgrader.Icon;
-                _products.Add(product);
+                _products.Add(upgrader.Title, product);
             }
         }
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            _products.ForEach(product => product.OnBuyButtonClick += Upgrade);
+
+            foreach (var product in _products.Values)
+                product.OnBuyButtonClick += Upgrade;
         }
 
         private void Upgrade(string title) => OnUpgrade?.Invoke(title);
@@ -47,15 +52,18 @@ namespace Assets._Project.Upgrade
         protected override void OnDisable()
         {
             base.OnDisable();
-            _products.ForEach(product => product.OnBuyButtonClick -= Upgrade);
+
+            foreach (var product in _products.Values)
+                product.OnBuyButtonClick -= Upgrade;
         }
 
-        public void SwitchInteraction(string title, bool isInteractable)
+        public void UpdateData(string title, float price, bool isInteractable)
         {
-            UIProduct product = _products.SingleOrDefault(product => product.Title == title);
-
-            if (product)
-                product.IsInteractable = isInteractable;
+            if (_products.ContainsKey(title))
+            {
+                _products[title].Price = _formater.Format((ulong)price);
+                _products[title].IsInteractable = isInteractable;
+            }
         }
     }
 }

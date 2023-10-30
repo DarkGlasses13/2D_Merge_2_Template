@@ -20,7 +20,13 @@ namespace Assets._Project.Upgrade
             return clone;
         }
 
-        public abstract void Upgrade(Player player);
-        protected abstract int GetLevelByStat(Player player);
+        public void Upgrade(Player player)
+        {
+            Level += 1.0f / Levels;
+            OnUpgrade(player);
+        }
+
+        protected abstract void OnUpgrade(Player player);
+        protected abstract float GetLevelByStat(Player player);
     }
 }
