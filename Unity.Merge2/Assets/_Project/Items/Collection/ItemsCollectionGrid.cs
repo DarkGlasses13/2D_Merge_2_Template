@@ -1,6 +1,4 @@
-﻿using Architecture_Base.UI;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -9,9 +7,8 @@ using Zenject;
 
 namespace Assets._Project.Items.Collection
 {
-    public class ItemsCollectionGrid : MonoBehaviour, IUIElement
+    public class ItemsCollectionGrid : Popup
     {
-        [SerializeField] private Button _closeButton;
         [SerializeField] private ScrollRect _scrollRect;
         private ItemBase _itemBase;
         private List<Image> _icons = new();
@@ -20,6 +17,7 @@ namespace Assets._Project.Items.Collection
         public void Construct(ItemBase itemBase)
         {
             _itemBase = itemBase;
+            //base.Construct(showHidePattern);
         }
 
         public async Task InitializeAsync(int collectedItemsCount)
@@ -38,32 +36,10 @@ namespace Assets._Project.Items.Collection
             UpdateCollection(collectedItemsCount);
         }
 
-        public void Show(Action callback = null)
+        protected override void OnEnable()
         {
-            if (gameObject.activeInHierarchy)
-                return;
-
             _scrollRect.verticalNormalizedPosition = 1;
-            gameObject.SetActive(true);
-            callback?.Invoke();
-        }
-
-        private void OnEnable()
-        {
-            _closeButton.onClick.AddListener(OnCloseButtonClicked);
-        }
-
-        private void OnCloseButtonClicked() => Hide();
-
-        public void Hide(Action callback = null)
-        {
-            gameObject.SetActive(false);
-            callback?.Invoke();
-        }
-
-        private void OnDisable()
-        {
-            _closeButton.onClick.RemoveListener(OnCloseButtonClicked);
+            base.OnEnable();
         }
 
         public void UpdateCollection(int collectedItemsCount)

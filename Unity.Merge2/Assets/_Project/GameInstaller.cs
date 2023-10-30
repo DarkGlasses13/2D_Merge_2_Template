@@ -2,6 +2,7 @@ using Assets._Project;
 using Assets._Project.Items;
 using Assets._Project.Items.Collection;
 using Assets._Project.Items.Merge;
+using Assets._Project.Upgrade;
 using UnityEngine;
 using Zenject;
 
@@ -14,8 +15,9 @@ public class GameInstaller : ScriptableObjectInstaller<GameInstaller>
         BindConfigLoader();
         BindItemBase();
         BindMergeGrid();
-        BindItemsCollection();
+        BindItemsCollectionGrid();
         BindLowerPanel();
+        BindUpgradePopup();
         BindControllers();
     }
 
@@ -35,6 +37,19 @@ public class GameInstaller : ScriptableObjectInstaller<GameInstaller>
             .Bind<ItemCollectController>()
             .FromNew()
             .AsSingle();
+
+        Container
+            .Bind<UpgradeController>()
+            .FromNew()
+            .AsSingle();
+    }
+
+    private void BindUpgradePopup()
+    {
+        Container
+            .Bind<UpgradePopup>()
+            .FromComponentInHierarchy()
+            .AsSingle();
     }
 
     private void BindLowerPanel()
@@ -45,7 +60,7 @@ public class GameInstaller : ScriptableObjectInstaller<GameInstaller>
             .AsSingle();
     }
 
-    private void BindItemsCollection()
+    private void BindItemsCollectionGrid()
     {
         Container
             .Bind<ItemsCollectionGrid>()

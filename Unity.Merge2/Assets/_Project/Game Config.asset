@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: Game Config
   m_EditorClassIdentifier: 
   <CooldownSpeed>k__BackingField: 0.5
+  _statUpgraders:
+  - {fileID: 11400000, guid: 8fbd6922528231a4aa0d749131d8e408, type: 2}
+  - {fileID: 11400000, guid: 5a1c3b3434b075349897c4dfa7dfb8a4, type: 2}
