@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "fe4dd2dde76f3a5e82caf852b735b3b99da9193c"
+      "hash": "1442cb5aeca9056cf2f823453469ccf44b257d84"
     },
     "com.unity.2d.animation": {
       "version": "7.0.11",
@@ -157,7 +157,7 @@
       }
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.21",
+      "version": "2.0.22",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -263,6 +263,13 @@
         "com.unity.modules.ui": "1.0.0",
         "com.unity.modules.imgui": "1.0.0"
       }
+    },
+    "fastrandom": {
+      "version": "https://github.com/vangogih/Dont-Use-UnityEngine.Random.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "c578f467eadfbb18538963d75d8f29e9f621d707"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
