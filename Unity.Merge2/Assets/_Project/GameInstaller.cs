@@ -2,8 +2,10 @@ using Assets._Project;
 using Assets._Project.Items;
 using Assets._Project.Items.Collection;
 using Assets._Project.Items.Merge;
+using Assets._Project.Money;
 using Assets._Project.Upgrade;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 [CreateAssetMenu(fileName = "Game Installer", menuName = "Installers/Game Installer")]
@@ -14,10 +16,13 @@ public class GameInstaller : ScriptableObjectInstaller<GameInstaller>
         BindRunner();
         BindConfigLoader();
         BindItemBase();
+        BindSpawnCooldownBar();
         BindMergeGrid();
         BindItemsCollectionGrid();
         BindLowerPanel();
         BindUpgradePopup();
+        BindMoneyFormater();
+        BindMoneyUICounter();
         BindControllers();
     }
 
@@ -40,6 +45,27 @@ public class GameInstaller : ScriptableObjectInstaller<GameInstaller>
 
         Container
             .Bind<UpgradeController>()
+            .FromNew()
+            .AsSingle();
+
+        Container
+            .Bind<MoneyEarnController>()
+            .FromNew()
+            .AsSingle();
+    }
+
+    private void BindMoneyUICounter()
+    {
+        Container
+            .Bind<MoneyUICounter>()
+            .FromComponentInHierarchy()
+            .AsSingle();
+    }
+
+    private void BindMoneyFormater()
+    {
+        Container
+            .Bind<MoneyFormater>()
             .FromNew()
             .AsSingle();
     }
@@ -77,6 +103,14 @@ public class GameInstaller : ScriptableObjectInstaller<GameInstaller>
 
         Container
             .Bind<MergeGridView>()
+            .FromComponentInHierarchy()
+            .AsSingle();
+    }
+
+    private void BindSpawnCooldownBar()
+    {
+        Container
+            .Bind<Slider>()
             .FromComponentInHierarchy()
             .AsSingle();
     }

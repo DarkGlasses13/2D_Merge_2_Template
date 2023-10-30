@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Assets._Project.Money;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Assets._Project.Items.Merge
 {
@@ -16,10 +18,14 @@ namespace Assets._Project.Items.Merge
         [SerializeField] private Image _dragItemIcon;
         [SerializeField] private GridLayoutGroup _layoutGroup;
         private Slot[] _slots;
+        private MoneyFormater _formater;
 
         public int Capacity => _layoutGroup.transform.childCount;
 
         private void OnValidate() => UpdateDragingItemIconSize();
+
+        [Inject]
+        public void Construct(MoneyFormater moneyFormater) => _formater = moneyFormater;
 
         private void Awake()
         {
@@ -67,6 +73,14 @@ namespace Assets._Project.Items.Merge
                 slot.OnTake -= Take;
                 slot.OnPut -= Put;
                 slot.OnEndTake -= EndTake;
+            }
+        }
+
+        public void ShowEarn(IEnumerable<ulong> earns)
+        {
+            for (int i = 0; i < Capacity; i++)
+            {
+                _slots[i].ShowEarn(_formater.Format(earns.ElementAt(i)));
             }
         }
     }

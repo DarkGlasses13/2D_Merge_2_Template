@@ -4,6 +4,7 @@ using Assets._Project.Items;
 using Assets._Project.Items.Merge;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemSpawnController : Controller
 {
@@ -11,15 +12,18 @@ public class ItemSpawnController : Controller
     private readonly GameConfigLoader _configLoader;
     private readonly Player _player;
     private readonly MergeGrid _mergeGrid;
+    private readonly Slider _cooldownBar;
     private GameConfig _config;
     private float _cooldown;
 
-    public ItemSpawnController(ItemBase itemBase, GameConfigLoader configLoader, Player player, MergeGrid itemField)
+    public ItemSpawnController(ItemBase itemBase, GameConfigLoader configLoader,
+        Player player, MergeGrid itemField, Slider cooldownBar)
     {
         _itemBase = itemBase;
         _configLoader = configLoader;
         _player = player;
         _mergeGrid = itemField;
+        _cooldownBar = cooldownBar;
     }
 
     public override async Task InitializeAsync()
@@ -29,6 +33,8 @@ public class ItemSpawnController : Controller
 
     public override void Tick()
     {
+        _cooldownBar.value = _cooldown;
+
         if (_cooldown >= 1)
         {
             if (_mergeGrid.HasEmptySlots)
@@ -44,6 +50,6 @@ public class ItemSpawnController : Controller
             return;
         }
 
-        _cooldown += _config.CooldownSpeed * _player.CooldownSpeedModifire * Time.deltaTime;
+        _cooldown += _config.SpawnCooldownSpeed * _player.SpawnCooldownSpeedModifire * Time.deltaTime;
     }
 }

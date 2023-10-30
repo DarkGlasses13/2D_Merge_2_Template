@@ -9,12 +9,12 @@ namespace Assets._Project.Upgrade
 
         public override void Upgrade(Player player)
         {
-            player.CooldownSpeedModifire += _value;
+            player.SpawnCooldownSpeedModifire += _value;
         }
 
         protected override int GetLevelByStat(Player player)
         {
-            return (int)((player.CooldownSpeedModifire - 1) / _value);
+            return (int)((player.SpawnCooldownSpeedModifire - 1) / _value);
         }
     }
 }

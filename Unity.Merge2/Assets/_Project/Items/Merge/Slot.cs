@@ -1,4 +1,8 @@
-﻿using System;
+﻿using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,9 +16,11 @@ namespace Assets._Project.Items.Merge
         public event Action<Slot> OnPut;
 
         [SerializeField] private Image _itemIcon;
+        [SerializeField] private TMP_Text _earn;
         private Canvas _canvas;
         private Image _dragIcon;
         private bool _isDrag;
+        private TweenerCore<Vector2, Vector2, VectorOptions> _earnShowTween;
 
         public Sprite Sprite 
         {
@@ -72,6 +78,22 @@ namespace Assets._Project.Items.Merge
         public void OnDrop(PointerEventData eventData)
         {
             OnPut?.Invoke(this);
+        }
+
+        public void ShowEarn(string amount)
+        {
+            if (Sprite == null)
+                return;
+
+            _earn.rectTransform.anchoredPosition = Vector3.zero;
+            _earn.text = "+ " + amount;
+            _earn.gameObject.SetActive(true);
+
+            _earnShowTween?.Restart();
+            _earnShowTween ??= _earn.rectTransform
+                .DOAnchorPosY(_earn.rectTransform.anchoredPosition.y + 150, 0.3f)
+                .OnComplete(() =>_earn.gameObject.SetActive(false))
+                .Play();
         }
     }
 }

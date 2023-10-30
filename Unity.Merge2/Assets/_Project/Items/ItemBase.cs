@@ -17,6 +17,8 @@ namespace Assets._Project.Items
 
         public IReadOnlyCollection<Sprite> Sprites => _sprites.AsReadOnly();
 
+        public int Count => _sprites.Count;
+
         public ItemBase(SpriteNameComparer spriteNameComparer, FastRandom random)
         {
             _spriteNameComparer = spriteNameComparer;

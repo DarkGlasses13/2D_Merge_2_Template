@@ -1,5 +1,8 @@
 ﻿using Architecture_Base.Core;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using static UnityEditor.Progress;
 
 namespace Assets._Project.Items.Merge
 {
@@ -8,13 +11,22 @@ namespace Assets._Project.Items.Merge
         private readonly MergeGrid _model;
         private readonly MergeGridView _view;
         private readonly ItemBase _itemBase;
+        private readonly GameConfigLoader _configLoader;
         private int _fromSlot = -1, _toSlot = -1;
+        private GameConfig _config;
 
-        public MergeGridController(MergeGrid model, MergeGridView view, ItemBase itemBase)
+        public MergeGridController(MergeGrid model, MergeGridView view,
+            ItemBase itemBase, GameConfigLoader configLoader)
         {
             _model = model;
             _view = view;
             _itemBase = itemBase;
+            _configLoader = configLoader;
+        }
+
+        public override async Task InitializeAsync()
+        {
+            _config = await _configLoader.LoadAsync();
         }
 
         protected override void OnEnable()
@@ -24,6 +36,20 @@ namespace Assets._Project.Items.Merge
             _view.OnEndTake += OnEndTake;
             _view.OnPut += OnPut;
             _view.Draw(_model.Items);
+        }
+
+        public void OnEarn()
+        {
+            List<ulong> earns = new();
+
+            foreach (var item in _model.Items)
+            {
+                earns.Add(item != null 
+                    ? _config.GetEarn(_itemBase.Count, item.MergeLevel) 
+                    : 0);
+            }
+            
+            _view.ShowEarn(earns);
         }
 
         private void OnTake(int from) => _fromSlot = from;
