@@ -1,5 +1,4 @@
 ﻿using Architecture_Base.Core;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,7 +21,8 @@ namespace Assets._Project.Upgrade
 
         public override async Task InitializeAsync()
         {
-            _upgraders.AddRange(_configLoader.Load().GetStatUpgraders(_player));
+            GameConfig config = await _configLoader.LoadAsync();
+            _upgraders.AddRange(config.GetStatUpgraders(_player));
             await _popup.InitializeAsync(_upgraders);
         }
 
