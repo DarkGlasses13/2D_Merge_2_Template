@@ -1,10 +1,8 @@
 ﻿using Architecture_Base.Core;
 using Assets._Project.Upgrade;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static UnityEditor.Progress;
 
 namespace Assets._Project.Items.Merge
 {
