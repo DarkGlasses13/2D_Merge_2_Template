@@ -1,4 +1,6 @@
 ﻿using Architecture_Base.Core;
+using Assets._Project.Upgrade;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,16 +14,21 @@ namespace Assets._Project.Items.Merge
         private readonly MergeGridView _view;
         private readonly ItemBase _itemBase;
         private readonly GameConfigLoader _configLoader;
+        private readonly UpgradeController _upgradeController;
+        private readonly Player _player;
         private int _fromSlot = -1, _toSlot = -1;
         private GameConfig _config;
 
         public MergeGridController(MergeGrid model, MergeGridView view,
-            ItemBase itemBase, GameConfigLoader configLoader)
+            ItemBase itemBase, GameConfigLoader configLoader,
+            UpgradeController upgradeController, Player player)
         {
             _model = model;
             _view = view;
             _itemBase = itemBase;
             _configLoader = configLoader;
+            _upgradeController = upgradeController;
+            _player = player;
         }
 
         public override async Task InitializeAsync()
@@ -35,7 +42,23 @@ namespace Assets._Project.Items.Merge
             _view.OnTake += OnTake;
             _view.OnEndTake += OnEndTake;
             _view.OnPut += OnPut;
+            _upgradeController.OnUpgrade += OnUpgrade;
             _view.Draw(_model.Items);
+        }
+
+        private void OnUpgrade()
+        {
+            for (int i = 0; i < _model.Items.Count; i++)
+            {
+                if (_model.Items.ElementAt(i) != null)
+                {
+                    if (_model.Items.ElementAt(i).MergeLevel <= _player.SpawnItemMergeLevel)
+                    {
+                        _model.Remove(i);
+                        _model.Put(i, _itemBase.GetByMergeLevel(_player.SpawnItemMergeLevel));
+                    }
+                }
+            }
         }
 
         public void OnEarn()
@@ -121,6 +144,7 @@ namespace Assets._Project.Items.Merge
             _view.OnTake -= OnTake;
             _view.OnEndTake -= OnEndTake;
             _view.OnPut -= OnPut;
+            _upgradeController.OnUpgrade -= OnUpgrade;
         }
     }
 }
