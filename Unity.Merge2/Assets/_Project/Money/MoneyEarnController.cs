@@ -1,7 +1,6 @@
 ﻿using Architecture_Base.Core;
 using Assets._Project.Items;
 using Assets._Project.Items.Merge;
-using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -11,16 +10,18 @@ namespace Assets._Project.Money
     {
         private readonly GameConfigLoader _configLoader;
         private readonly Player _player;
-        private readonly MoneyUICounter _uiCounter;
+        private readonly UICounter _uiCounter;
         private readonly MergeGrid _mergeGrid;
         private readonly MergeGridController _mergeGridController;
         private readonly ItemBase _itemBase;
+        private readonly ResourceEventController _resourceController;
         private float _cooldown;
         private GameConfig _config;
 
         public MoneyEarnController(GameConfigLoader configLoader,
             Player player, MoneyUICounter uiCounter, MergeGrid mergeGrid,
-            MergeGridController mergeGridController, ItemBase itemBase) 
+            MergeGridController mergeGridController, ItemBase itemBase,
+            ResourceEventController resourceController) 
         {
             _configLoader = configLoader;
             _player = player;
@@ -28,6 +29,7 @@ namespace Assets._Project.Money
             _mergeGrid = mergeGrid;
             _mergeGridController = mergeGridController;
             _itemBase = itemBase;
+            _resourceController = resourceController;
         }
 
         public override async Task InitializeAsync()
@@ -37,14 +39,17 @@ namespace Assets._Project.Money
 
         public override void Tick()
         {
-            if (_cooldown >= 1)
+            if (_resourceController.IsEventActive)
+                return;
+
+            if (_cooldown >= _config.EarnCooldown / _player.EarnCooldownModifire)
             {
                 Earn();
                 _cooldown = 0;
                 return;
             }
 
-            _cooldown += _config.EarnCooldownSpeed * _player.EarnCooldownSpeedModifire * Time.deltaTime;
+            _cooldown += Time.deltaTime;
         }
 
         private void Earn()

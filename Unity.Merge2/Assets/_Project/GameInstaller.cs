@@ -19,10 +19,12 @@ public class GameInstaller : ScriptableObjectInstaller<GameInstaller>
         BindSpawnCooldownBar();
         BindMergeGrid();
         BindItemsCollectionGrid();
+        BindResourceSpriteLoader();
+        BindResourceEventScreen();
         BindLowerPanel();
         BindUpgradePopup();
         BindMoneyFormater();
-        BindMoneyUICounter();
+        BindUICounters();
         BindControllers();
     }
 
@@ -52,12 +54,22 @@ public class GameInstaller : ScriptableObjectInstaller<GameInstaller>
             .Bind<MoneyEarnController>()
             .FromNew()
             .AsSingle();
+
+        Container
+            .Bind<ResourceEventController>()
+            .FromNew()
+            .AsSingle();
     }
 
-    private void BindMoneyUICounter()
+    private void BindUICounters()
     {
         Container
             .Bind<MoneyUICounter>()
+            .FromComponentInHierarchy()
+            .AsSingle();
+
+        Container
+            .Bind<ResourceUICounter>()
             .FromComponentInHierarchy()
             .AsSingle();
     }
@@ -82,6 +94,22 @@ public class GameInstaller : ScriptableObjectInstaller<GameInstaller>
     {
         Container
             .Bind<LowerPanel>()
+            .FromComponentInHierarchy()
+            .AsSingle();
+    }
+
+    private void BindResourceSpriteLoader()
+    {
+        Container
+            .Bind<ResourceSpriteLoader>()
+            .FromNew()
+            .AsSingle();
+    }
+
+    private void BindResourceEventScreen()
+    {
+        Container
+            .Bind<ResourceEventScreen>()
             .FromComponentInHierarchy()
             .AsSingle();
     }

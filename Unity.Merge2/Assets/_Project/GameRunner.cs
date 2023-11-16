@@ -18,13 +18,16 @@ namespace Assets._Project
         private readonly ItemCollectController _itemCollectController;
         private readonly UpgradeController _upgradeController;
         private readonly MoneyEarnController _moneyEarnController;
-        private readonly MoneyUICounter _moneyUICounter;
+        private readonly UICounter _moneyUICounter;
+        private readonly ResourceEventController _resourceController;
+        private readonly ResourceUICounter _resourceUICounter;
         private readonly Player _player;
 
         public GameRunner(ItemBase itemBase, MergeGridController mergeGridController,
             ItemSpawnController itemSpawnController, ItemCollectController itemCollectController,
             UpgradeController upgradeController, MoneyEarnController moneyEarnController,
-            MoneyUICounter moneyUICounter, Player player)
+            MoneyUICounter moneyUICounter, ResourceEventController resourceController,
+            ResourceUICounter resourceUICounter, Player player)
         {
             _itemBase = itemBase;
             _mergeGridController = mergeGridController;
@@ -33,6 +36,8 @@ namespace Assets._Project
             _upgradeController = upgradeController;
             _moneyEarnController = moneyEarnController;
             _moneyUICounter = moneyUICounter;
+            _resourceController = resourceController;
+            _resourceUICounter = resourceUICounter;
             _player = player;
         }
 
@@ -50,6 +55,7 @@ namespace Assets._Project
                 _itemCollectController,
                 _upgradeController,
                 _moneyEarnController,
+                _resourceController,
             };
         }
 
@@ -60,6 +66,7 @@ namespace Assets._Project
         protected override void OnControllersEnabled()
         {
             _moneyUICounter.Set(_player.Money);
+            _resourceUICounter.Set(_player.Resource);
         }
 
         public void Dispose()

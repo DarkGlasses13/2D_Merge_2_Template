@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088d2bb48eabf6744bcd3c929f3074fd, type: 3}
   m_Name: Game Config
   m_EditorClassIdentifier: 
-  <SpawnCooldownSpeed>k__BackingField: 0.2
-  <EarnCooldownSpeed>k__BackingField: 0.7
+  <SpawnCooldown>k__BackingField: 5
+  <EarnCooldown>k__BackingField: 1.5
+  <ResourceEventCooldown>k__BackingField: 30
+  <ResourceEventTime>k__BackingField: 5
   <EarnCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
@@ -38,6 +40,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  <ResourceRate>k__BackingField: 2
+  <ResourceSpeed>k__BackingField: 400
   _statUpgraders:
   - {fileID: 11400000, guid: 8fbd6922528231a4aa0d749131d8e408, type: 2}
   - {fileID: 11400000, guid: 5a1c3b3434b075349897c4dfa7dfb8a4, type: 2}
+  - {fileID: 11400000, guid: d2bc2b3527332b3429d5b03e60267584, type: 2}
+  - {fileID: 11400000, guid: 11f36e2beefb94b46a172236d9b1c902, type: 2}

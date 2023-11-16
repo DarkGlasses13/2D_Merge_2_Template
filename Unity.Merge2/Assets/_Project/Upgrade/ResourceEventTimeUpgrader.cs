@@ -2,19 +2,19 @@
 
 namespace Assets._Project.Upgrade
 {
-    [CreateAssetMenu(menuName = "Stat Upgraders/Spawn Cooldown Upgrader")]
-    public class SpawnCooldownUpgrader : StatUpgrader
+    [CreateAssetMenu(menuName = "Stat Upgraders/Resource Event Time Upgrader")]
+    public class ResourceEventTimeUpgrader : StatUpgrader
     {
         [SerializeField] private float _value;
 
         protected override float GetLevelByStat(Player player)
         {
-            return (player.SpawnCooldownModifire - 1) / _value;
+            return (player.ResourceEventTimeModifire - 1) / _value;
         }
 
         protected override void OnUpgrade(Player player)
         {
-            player.SpawnCooldownModifire += _value;
+            player.ResourceEventTimeModifire += _value;
         }
     }
 }

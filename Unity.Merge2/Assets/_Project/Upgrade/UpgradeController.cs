@@ -14,7 +14,7 @@ namespace Assets._Project.Upgrade
         private readonly GameConfigLoader _configLoader;
         private readonly Player _player;
         private readonly UpgradePopup _popup;
-        private readonly MoneyUICounter _moneyCounter;
+        private readonly UICounter _moneyCounter;
         private readonly List<StatUpgrader> _upgraders = new();
 
         public UpgradeController(GameConfigLoader configLoader, Player player,
